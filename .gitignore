@@ -1,0 +1,10 @@
+# Node.js files
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Compiled files
+/dist/
+
+# Symbolic links
+dist

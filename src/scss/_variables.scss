@@ -1,0 +1,47 @@
+// _variables.scss
+
+ //'Raleway' 400  'Poppins' 300
+$font-family: 'Poppins', sans-serif;
+$font-size: 16px;
+$line-height: 24px;
+$font-weight: 300;
+
+$content-margins: 9%;
+$content-margins-wide: 0%;
+
+$border-color: #DDDDDD;
+$border-thickness: 1px;
+$border-style: solid;
+
+$primary-bg: #F7F9FB;
+$content-bg: #FFFFFF;
+$text-color: #000000; // prior was #333333
+$menu-bar-bg: #00AFAA;
+$header-bg: white;//lighten(#00AFAA, 10%); //original: #8fba92 proposed: #6fa682
+$menu-bar-light: lighten($menu-bar-bg, 60%);
+$menu-bar-dark: darken($menu-bar-bg, 5%);
+
+// NOTE: taken from logo guidelines
+$pms-144: #F08B21;
+$pms-3255: #00AFAA;
+$pms-540: #093153;
+$pms-1235: #FCB423;
+
+
+/*
+$primary-bg: $pms-540;
+$content-bg: lighten($primary-bg, 5%);
+$text-color: #FFFFFF;
+$menu-bar-bg: $pms-3255;
+$header-bg: $pms-1235;
+*/
+
+
+$color-light: rgba(255, 255, 255, 0.87);
+$background-color: #242424;
+$link-color: #00AFAA;
+$link-hover-color: #535bf2;
+$button-bg-color: $menu-bar-bg;
+$button-hover-border-color: #646cff;
+$button-focus-outline-color: -webkit-focus-ring-color;
+

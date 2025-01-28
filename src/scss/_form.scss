@@ -1,0 +1,59 @@
+/* Form styles */
+.form-section {
+    margin-top: 20px;
+}
+
+/* Input styles */
+input {
+    width: 49%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    font-size: $font-size;
+}
+
+select {
+    //padding: 10px;
+    margin-bottom: 20px;
+    font-size: $font-size; 
+}
+
+/* Additional styling for specific fields */
+.note {
+    color: #777;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+/* Label styles */
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Radio button styles */
+.radio-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.radio-option input {
+    @extend .centered-content;
+    margin-right: 10px;
+    width: auto;
+    margin-bottom: 0px;
+    box-sizing: none;
+    font-size: $font-size;
+}
+
+@media (max-width: 856px) {
+    input,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        font-size: $font-size;
+    }
+}

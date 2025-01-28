@@ -1,0 +1,55 @@
+// _typography.scss
+
+@import './variables';
+
+h1 {
+  font-size: 2.8em;
+  line-height: 1.1;
+  margin-top: 0.2em;
+  margin-bottom: 0.4em;
+}
+
+.subheading {
+  margin: 0px;
+  margin-bottom: 0.5em;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 700px) {
+  h1 {
+    font-size: 2.2em;
+    line-height: 1.0;
+    margin-bottom: 0.2em;
+  }
+}
+
+h2 {
+  line-height: 1.1;
+  margin-bottom: 0.4em;
+}
+
+h3 {
+  line-height: 1.1;
+  margin-bottom: 0.4em;
+}
+
+a {
+  font-weight: 500;
+  color: $link-color;
+  text-decoration: inherit;
+
+  &:hover {
+    color: $link-hover-color;
+  }
+}
+
+.colored-link {
+  color: $text-color;
+  font-weight: bold;
+}
+
+p {
+  margin-block-end: auto;
+  margin-block-start: auto;
+  padding-bottom: 0.7rem;
+}

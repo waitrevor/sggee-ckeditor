@@ -1,0 +1,571 @@
+// main.scss
+
+@import "variables";
+@import "base";
+@import "typography";
+@import "buttons";
+@import "layout";
+@import "theme";
+@import "form";
+@import "search";
+@import "searchCriteria";
+
+.sggee-app {
+  background-color: $primary-bg;
+  color: $text-color;
+
+  .adjusted-margin {
+    // @media (max-width: 1900px) {
+    //   position: relative;
+    //   left: 150px;
+    // }
+    @media (max-width: 1599px) {
+      position: relative;
+      left: 0px;
+    }
+  }
+  
+  .main-content {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+    margin-left: $content-margins;
+    margin-right: $content-margins;
+    //min-height: 50vh;
+    min-height: calc(100vh - 341px); // NOTE: based on footer height - may need to calc this
+
+    background-color: $content-bg;
+    box-shadow: 0 0 10px rgba(4, 4, 4, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    padding-inline: 50px;
+
+    //min-width: 950px;
+    //width: auto;
+    //max-width: 1075px;
+
+    ul {
+      list-style: none;
+      text-align: left;
+    }
+
+    li {
+      list-style: square; /* Add bullet points inside the <li> elements */
+      //position: relative; /* Position the bullet points and text relative to the <li> */
+      //padding-left: 0.5em; /* Adjust the space between the bullet point and text */
+      padding-bottom: 0.65em;
+    }
+  }
+
+  .main-content-wide {
+    @extend .main-content;
+    //max-width: 1280px;
+    margin-left: $content-margins-wide;
+    margin-right: $content-margins-wide;
+    padding-inline: 10px;
+  }
+
+  .side-content {
+    padding: 2px;
+    text-align: left;
+    height: 100%;
+  }
+
+  .text-field {
+    height: calc($line-height * 3); /* Adjust based on font size */
+    line-height: $line-height;
+    overflow: hidden; /* Hide overflow */
+    white-space: no-wrap; /* Prevent text from wrapping to a new line */
+    text-overflow: ellipsis; /* Show ellipsis for overflowing text */
+  }
+
+  .two-columns {
+    columns: 2; /* Creates two columns */
+    -webkit-columns: 2; /* For Safari */
+    -moz-columns: 2; /* For Firefox */
+    list-style-type: none; /* Removes bullet points */
+    padding: 0; /* Removes padding */
+    margin-inline: 60px; /* Removes margin */
+
+    @media (max-width: 856px) {
+      margin-inline: 20px; /* Removes margin */
+    }
+
+    @media (max-width: 456px) {
+      margin-inline: 10px; /* Removes margin */
+    }
+  }
+
+  .two-columns li {
+    margin-bottom: 10px; /* Adds space between items */
+  }
+
+  .resizable-image {
+    width: 100%;
+    height: auto;
+  }
+
+  select {
+    // Reset default styles
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    text-overflow: '';
+    width: auto;
+    
+    // Custom styling
+    padding: 8px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+  
+    // Arrow icon
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 2px center;
+    padding-right: 24px;
+  
+    // Hover state
+    &:hover {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+  
+    // Focus state
+    &:focus {
+      outline: none;
+    }
+
+    &::-ms-expand {
+      color: transparent;
+    }
+  
+    &::-ms-dropdown {
+      appearance: none;
+    }
+  }
+
+  .paragraph-section {
+    p {
+      &:last-child {
+        //margin-bottom: calc(2 * $line-height);
+      }
+    }
+  }
+
+  .centered-content {
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Flexbox styles */
+  .flex-column-container {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .flex-row-container {
+    @extend .flex-column-container;
+    flex-direction: row;
+  }
+
+  @media (max-width: 800px) {
+    .flex-row-container {
+      flex-direction: column;
+    }
+  }
+
+  .flex-item {
+    flex: 1;
+    padding: 16px;
+    border: $border-thickness $border-style $border-color;
+    box-sizing: border-box;
+    margin: 16px;
+    //margin-top: 16px;
+    //margin-bottom: 16px;
+    flex-basis: 200px;
+    padding-top: 0px;
+  }
+
+  @media (max-width: 856px) {
+    .flex-item {
+      margin: 0px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+  }
+
+  .flex-item-centered {
+    @extend .flex-item;
+    display: flex; /* Center content horizontally and vertically */
+    align-items: center; /* Center content vertically */
+  }
+
+  .full-width {
+    flex-basis: 100%;
+  }
+
+  .remove-border {
+    border: none;
+  }
+
+  .add-border {
+    border: $border-thickness $border-style $border-color;
+  }
+
+  .border-right {
+    border-right: $border-thickness $border-style $border-color;
+  }
+
+  .logo-header {
+    display: flex;
+    align-items: center; // Vertically align
+    justify-content: flex-end;
+  }
+
+  .logo-icon {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 20px;
+    margin-inline: 12px;
+  }
+
+  .remove-margins {
+    margin: 0px;
+  }
+
+  .remove-padding {
+    padding: 0px;
+  }
+
+  .quick-jump {
+    /* Empty CSS block */
+  }
+
+  .pdf-icon {
+    color: $pms-540;
+    width: 20px;
+    height: auto;
+    margin-top: 10px;
+    margin-right: 6px;
+  }
+
+  .youtube-icon {
+    color: $pms-540;
+    width: 22px;
+    font-size: 22px;
+    height: auto;
+    margin-right: 6px;
+  }
+
+  .db-svg-icon {
+    width: 18px;
+    height: auto;
+  }
+
+    /* Default styles for images */
+  .small-image {
+    width: 400px; /* Set the desired width for the images */
+    height: auto; /* Maintain the aspect ratio */
+  }
+
+  .spinner {
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-top: 8px solid $menu-bar-bg;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Media query for mobile devices */
+  @media (max-width: 856px) {
+    .main-content {
+      padding-inline: 16px;
+      margin-inline: 0px;
+    }
+    .small-image {
+      width: 300px; /* Adjust the width for mobile devices */
+    }
+  }
+
+  footer {
+    text-align: center;
+    //background: linear-gradient(to right, transparent -30%, $menu-bar-bg 40%, $menu-bar-bg 60%, transparent 130%);
+    background: $menu-bar-bg;
+    color: $text-color;
+    padding-block: 10px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+    z-index: 997;
+
+    a {
+      color: $text-color;
+      text-decoration: underline;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  
+    .footer-wrapper {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      
+      .main-section {
+        margin-top: 8px;
+      }
+  
+      .partner-section {
+        margin-left: 60px;
+        @media (max-width: 856px) {
+          margin-left: 0px;
+          padding-block: 0px;
+        }
+      }
+  
+      .copyright-section {
+        margin-top: 8px;
+      }
+    }
+
+    .nav-section {
+      margin-top: 4px;
+    }
+  }
+
+  .collapsible-list {
+    .item {
+      position: relative;
+      margin-bottom: 40px;
+  
+      .heading {
+        font-size: 1.25rem;
+        font-weight: bold;
+        cursor: pointer;
+        display: block;
+      }
+  
+      /* Description styling */
+      .section-description {
+        margin: 10px 0;
+        font-style: italic;
+        color: #666;
+        max-height: 1.8em; /* Restrict to one line height */
+        overflow: hidden; /* Hide overflowing text */
+        display: -webkit-box; /* Enable flexbox for ellipsis */
+        -webkit-box-orient: vertical; /* Allow box orientation */
+        -webkit-line-clamp: 1; /* Limit to one line */
+        text-overflow: ellipsis; /* Display ellipsis (...) for overflow */
+        width: 100%; /* Full width */
+        box-sizing: border-box; /* Include padding in width calculation */
+      }
+  
+      /* The list is always visible */
+      .description {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+  
+        li {
+          padding: 5px 0;
+        }
+      }
+  
+      /* Style for the 'Read More' / 'Read Less' toggle button */
+      .toggle-label {
+        position: absolute;
+        right: 0;
+        top: 20;
+        cursor: pointer;
+        color: $menu-bar-bg;
+        font-weight: bold;
+        background-color: white;
+        padding-left: 10px;
+        padding-right: 10px;
+        z-index: 1;
+      }
+  
+      input[type="checkbox"] {
+        display: none;
+      }
+  
+      /* When the checkbox is checked, expand the text */
+      input[type="checkbox"]:checked + .heading + .section-description {
+        max-height: none; /* Remove height limit */
+        line-height: normal; /* Allow text to wrap normally */
+        overflow: visible; /* Show the rest of the content */
+        display: block; /* Ensure it's a block element */
+      }
+  
+      /* Change 'Read More' to 'Read Less' */
+      input[type="checkbox"]:checked + .heading + .section-description + .toggle-label::before {
+        content: 'Read Less';
+      }
+  
+      /* Default 'Read More' content */
+      input[type="checkbox"] + .heading + .section-description + .toggle-label::before {
+        content: 'Read More';
+      }
+    }
+  }
+  
+  
+
+  .search-main-content {
+    @extend .main-content;
+    width: $max-width; // coming from _search.scss
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    margin-top: -20px !important;
+    margin-bottom: 40px !important;
+    margin-left: 60px !important;
+    
+    @media (max-width: 1920px) {
+      margin-left: 130px !important;
+      width: 100% !important;
+    }
+  
+    @media (max-width: 1755px) {
+      margin-left: -50px !important;
+      //transition: margin-left 0.0s ease !important;
+      //margin-left: 0px !important;
+      //margin-top: -20px !important;
+      //width: 100% !important;
+      //padding-inline: 10px !important; // Adjust as needed
+    }
+    
+    @media (max-width: 1412px) {
+      width: 89% !important;
+      margin-left: 10px !important;
+    }
+
+    @media (max-width: 1112px) {
+      width: 88% !important;
+      margin-left: 5px !important;
+    }
+
+    @media (max-width: 936px) {
+      position: relative !important;
+      margin-right: 0px !important;
+      width: auto !important;
+      max-width: 1000px !important;
+      padding-inline: 20px !important; // Adjust as needed
+      margin-left: 0px !important;
+    }
+  }
+
+  .copyright-main-content {
+    @extend .search-main-content;
+    display: flex;
+    flex-direction: column; /* Stack on narrow screens */
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+    min-height: 0;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  
+    h3 {
+      margin-top: 0;
+    }
+  
+    /* Flex items take up equal space */
+    .terms, .copyright {
+      flex: 1;
+      padding: 0 16px;
+    }
+  
+    /* Side-by-side layout on wider screens */
+    @media (min-width: 600px) {
+      flex-direction: row; /* Place side-by-side */
+      align-items: start;
+    }
+  }
+  
+}
+
+/*
+    GLOBAL STYLES:
+
+Pros:
+
+-Consistent look and feel throughout the project
+-Reusable code to save time and reduce repetition
+-Initial website load is fast (only 1 SCSS file)
+-Quick styling accross the entire project
+-Easy changes that affect all components using those styles
+
+Cons:
+
+-Mixing styles can lead to issues
+-Difficult to work on separate pages
+-Less flexible
+-Less scalability ***
+-Initial load might be fast, but subsequent ones could be slower
+
+
+    ADDITIONAL NOTES: 
+
+Use global SCSS files judiciously. Reserve them for styles that are genuinely global and shared across the majority of your project.
+
+Leverage the scoped attribute in Vue components to encapsulate styles when necessary, ensuring component-level isolation.
+
+Document your global styles and their usage to make it easier for team members to understand and maintain them.
+
+Consider using CSS naming conventions and methodologies like BEM (Block Element Modifier) to minimize naming conflicts and improve clarity.
+
+Regularly review and refactor your global styles to keep them organized and prevent bloat.
+
+In conclusion, global SCSS files can be a powerful tool for maintaining consistency and reusability in your project's styles, 
+but they should be used thoughtfully to avoid potential drawbacks related to scope, isolation, and maintenance. 
+
+Balancing global styles with component-specific styling is essential for a maintainable and scalable Vue 3 project.
+
+
+~~~ COMMON ELEMENTS ~~~
+
+Buttons:
+    background-color
+    color
+    padding
+    border
+    hover
+
+Tables:
+    width
+    border-collapse
+    padding
+    border
+    background-color
+    color
+
+Forms:
+    row-width
+    row-height
+    padding
+    margin
+    border
+    background-color
+    (alternating row colors)
+
+Headings and Text:
+
+    font-family
+    color
+    font-size
+    line-height
+    font-weight
+
+*/
