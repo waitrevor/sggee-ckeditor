@@ -42,6 +42,8 @@ import { updateRouteParametersLodzTrinity, updateSearchCriteriaFromRouteLodzTrin
 
 import Editor from "../components/Editor.vue"
 import FileManagerTest from '../components/FileManagerTest.vue';
+// @ts-ignore
+import FileManager from '../components/FileManager.vue';
 
 const createSearchRoute = (
   path: string,
@@ -90,6 +92,12 @@ const routes = [
     path: "/filemanagertest",
     name: "FileManagertest",
     component: FileManagerTest,
+    props: true,
+  },
+  {
+    path: "/filemanager",
+    name: "FileManager",
+    component: FileManager,
     props: true,
   },
   {

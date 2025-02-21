@@ -5,7 +5,7 @@
       <component :is="Component" :key="route.path"/>
     </router-view>
   </div>
-  <AppFooter/>
+  <!-- <AppFooter/> -->
 </template>
 
 <script setup lang="ts">

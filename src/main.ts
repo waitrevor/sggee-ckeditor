@@ -9,6 +9,7 @@ import './scss/main.scss';
 
 // @ts-ignore
 import VueStripeMenu from 'vue-stripe-menu';
+
 import 'vuefinder/dist/style.css'
 // @ts-ignore
 import VueFinder from 'vuefinder/dist/vuefinder'
@@ -121,7 +122,8 @@ requestInterceptor();
 
 // Set up Vue app (with Axios and FontAwesome)
 const app = createApp(App)
-  .use(VueStripeMenu, VueAxios, axios, VueFinder)
+  .use(VueStripeMenu, VueAxios, axios)
+  .use(VueFinder)
   .component('font-awesome-icon', FontAwesomeIcon);
 
 // Add our custom vue router
