@@ -7,7 +7,7 @@
   <div class="grid sm:grid-cols-6 grid-cols-1 gap-4">
       <div class="col-span-4">
           <div class=" dark:text-white">
-              <vue-finder id="vf" :key="componentKey" :request="request" :features="ENABLED_FEATURES"></vue-finder>
+              <vue-finder id="vf" :key="componentKey" :request="request" :features="ENABLED_FEATURES" theme="light"></vue-finder>
           </div>
       </div>
   </div>
@@ -20,6 +20,9 @@ import apiClient from "../utilities/githubUtil";
 import {FEATURES} from "vuefinder/dist/features.js";
 
 const ENABLED_FEATURES = [
+  // Add New Folder and Rename?
+   FEATURES.NEW_FOLDER,
+   FEATURES.RENAME,
    FEATURES.DELETE,
    FEATURES.UPLOAD,
    FEATURES.PREVIEW,
