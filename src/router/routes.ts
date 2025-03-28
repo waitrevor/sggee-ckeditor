@@ -40,8 +40,6 @@ import { updateRouteParametersRussiaPoland, updateSearchCriteriaFromRouteRussiaP
 import { fetchLodzTrinityMetaText, fetchLodzTrinityByName } from '../graphql/lodz-trinity/api';
 import { updateRouteParametersLodzTrinity, updateSearchCriteriaFromRouteLodzTrinity } from '../graphql/lodz-trinity/routing';
 
-import Editor from "../components/Editor.vue"
-import FileManagerTest from '../components/FileManagerTest.vue';
 // @ts-ignore
 import FileManager from '../components/FileManager.vue';
 
@@ -87,12 +85,6 @@ const routes = [
     name: 'Home',
     component: Home,
     props: true
-  },
-  {
-    path: "/filemanagertest",
-    name: "FileManagertest",
-    component: FileManagerTest,
-    props: true,
   },
   {
     path: "/filemanager",
