@@ -1,4 +1,5 @@
 
+<!-- NOTE: THIS ENTIRE FILE IS UNUSED.... MAY NEED IT LATER SO ITS KEPT -->
 <script setup lang="ts">
 import { ref } from 'vue';
 
@@ -72,6 +73,9 @@ label {
 
 input {
 	width: 100%;
+	border: 1px solid #ccc;
+	font-family: inherit; /* Inherit the font family from the parent or body */
+	font-weight: inherit; /* Inherit font weight */
 }
 
 button {
