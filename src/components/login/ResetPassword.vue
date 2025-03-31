@@ -6,8 +6,6 @@ const email = ref('');
 const verificationCode = ref('');
 
 const newPassword = ref('');
-const passwordInput = ref<HTMLInputElement | null>(null);
-const iconMargin = ref<Record<string, string>>({});
 const showPassword = ref<boolean>(false);
 const capsLockOn = ref<boolean>(false);
 const numLockOn = ref<boolean>(true);
@@ -17,28 +15,10 @@ const step = ref(1); // Initial step
 const errorMessageStep2 = ref<string>('');
 const errorMessageStep3 = ref<string>('');
 
-const updateInputWidth = () => {
-  console.log('called', passwordInput.value)
-  if (passwordInput.value) {
-    const inputWidth = passwordInput.value.offsetWidth;
-		iconMargin.value = { marginLeft: `calc(${inputWidth}px - 32px)` };
-
-  }
-};
-
 const checkLockKeys = (event: KeyboardEvent) => {
   capsLockOn.value = event.getModifierState('CapsLock');
   numLockOn.value = event.getModifierState('NumLock');
 };
-
-onMounted(() => {
-  updateInputWidth();
-  window.addEventListener('resize', updateInputWidth);
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', updateInputWidth);
-});
 
 async function initiatePasswordReset() {
   try {
@@ -67,8 +47,7 @@ async function initiatePasswordReset() {
 
 async function doPasswordReset() {
   try {
-    const performResetEndpoint = import.meta.env.VITE_PERFORM_RESET_ENDPOINT;
-    const response = await fetch(performResetEndpoint, {
+    const response = await fetch(import.meta.env.VITE_PERFORM_RESET_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -95,27 +74,6 @@ async function doPasswordReset() {
 
 }
 
-// Watch for changes in the newPassword
-watch(step, async (newStep, oldStep) => {
-  if (newStep === 2) {
-    await waitForInputValue();
-    updateInputWidth();
-  }
-});
-
-// Function to wait until the password input has a value
-async function waitForInputValue(): Promise<void> {
-  return new Promise((resolve) => {
-    const intervalId = setInterval(() => {
-      if (passwordInput) {
-        clearInterval(intervalId);
-        resolve();
-      }
-    }, 10); // Check every 100 milliseconds
-  });
-}
-
-
 const reloadPage = () => {
   // Reload the page
   window.location.reload();
@@ -130,7 +88,8 @@ const reloadPage = () => {
 				<!-- Step 1: Enter Email -->
 				<form @submit.prevent="initiatePasswordReset">
 					<p>Please enter the email associated with your account.</p>
-					<label for="email">Email:</label>
+          <br>
+					<label for="email"><strong>Email:</strong></label>
 					<input v-model="email" type="email" id="email" />
 					<div class="centered-content">
 						<button type="submit">Submit</button>
@@ -146,17 +105,34 @@ const reloadPage = () => {
           <input type="text" id="username" style="position: absolute; left: -9999px;" :value="email" required/>
 
           <p>Enter the verification code sent to <strong>{{ email }}</strong> and a new password for your account.</p>
-          <label for="verificationCode">Verification Code:</label>
-          <input v-model="verificationCode" type="text" id="verificationCode" required/>
+          <br>
+          <label for="verificationCode"><strong>Verification Code:</strong></label>
+          <input v-model="verificationCode" type="text" id="verificationCode" placeholder="Enter your verification code" required/>
 
-          <!-- New Password Field -->
-          <label for="newPassword">New Password:</label>
-          <div class="password-container">
-            <input v-model="newPassword" @keydown="checkLockKeys" :type="showPassword ? 'text' : 'password'" id="newPassword" ref="passwordInput" class="password-input" required/>
-            <div class="icon-container" @click="showPassword = !showPassword;" :style="iconMargin">
-              <font-awesome-icon class="eye-icon" :icon="['fas', showPassword ? 'fa-eye' : 'fa-eye-slash']"/>
+
+          <!-- New Password Input -->
+          <div class="form-group password-group">
+            <label for="password"><strong>New Password:</strong></label>
+            <div class="password-input-wrapper">
+              <input
+                id="password"
+                ref="passwordInput"
+                name="new-password"
+                :type="showPassword ? 'text' : 'password'"
+                autocomplete="current-password"
+                v-model="newPassword"
+                required
+                placeholder="Enter your new password"
+                @keydown="checkLockKeys"
+              />
+              <font-awesome-icon
+                class="eye-icon"
+                :icon="['fas', showPassword ? 'eye' : 'eye-slash']"
+                @click="showPassword = !showPassword;"
+              />
             </div>
           </div>
+          
 
           <div v-if="capsLockOn" class="info-icon">
             <font-awesome-icon :icon="['fas', 'fa-info-circle']"/>
@@ -206,16 +182,6 @@ const reloadPage = () => {
   padding: 20px;
 }
 
-.password-input {
-	padding-right: 32px;
-  width: 100%;
-}
-
-.password-container {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-}
 
 .info-icon {
   margin-bottom: 10px;
@@ -233,12 +199,7 @@ const reloadPage = () => {
   cursor: pointer;
 }
 
-.eye-icon {
-  font-size: 16px;
-}
-
-.error-message {
-	color: red;
+.error-message { /* additional to the global style */
   max-width: 500px;
   margin-top: 20px;
 }
@@ -252,6 +213,9 @@ input {
 	width: 100%;
 	padding: 7px;
 	margin-bottom: 16px;
+  border: 1px solid #ccc;
+  font-family: inherit; /* Inherit the font family from the parent or body */
+  font-weight: inherit; /* Inherit font weight */
 }
 
 button {
@@ -263,5 +227,40 @@ button {
 
 .reset-password-finalize-container {
 	margin-top: 20px;
+}
+
+
+.password-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding-right: 2.5rem; /* Space for the icon */
+  box-sizing: border-box;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 0.5rem;
+  cursor: pointer;
+  color: #6c757d;
+  transition: color 0.2s;
+  width: 24px;
+  height: auto;
+  top: 11px;
+}
+
+.eye-icon:hover {
+  color: #495057;
 }
 </style>
