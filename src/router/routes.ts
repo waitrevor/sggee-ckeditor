@@ -145,7 +145,8 @@ const protectedRoutes = [
   'OdessaStpeteSearch',
   'ParishRecordsIdxSearch',
   'RussiaPolandMapSearch',
-  'LodzTrinitySearch'
+  'LodzTrinitySearch',
+  'FileManager'
 ];
 
 // Navigation guard to check for authentication

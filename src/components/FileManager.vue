@@ -18,6 +18,10 @@ import { onMounted, ref, computed } from 'vue'
 import apiClient from "../utilities/githubUtil";
 // @ts-ignore
 import {FEATURES} from "vuefinder/dist/features.js";
+import { AccessTokenManager } from '../utilities/auth';
+
+const accessTokenManager = AccessTokenManager.getInstance();
+const token = accessTokenManager.getAccessToken();
 
 const ENABLED_FEATURES = [
    FEATURES.NEW_FOLDER,
@@ -45,9 +49,7 @@ async function handleOptionSelection(option: string) {
 
 const request = computed(() => ({
     baseUrl: import.meta.env.VITE_GITHUB_FILEURL,
-    headers: { "X-ADDITIONAL-HEADER": 'yes',
-    Authorization: import.meta.env.VITE_GITHUB_BEARER_TOKEN
-  },
-     params: { branch: selectedBranch}
+    headers: { Authorization: `Bearer ${token}` },
+     params: { branch: selectedBranch }
   }))
 </script>
