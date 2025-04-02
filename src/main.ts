@@ -115,11 +115,6 @@ library.add(
   faAngleDoubleDown,
   faAngleDoubleUp
 );
-// import CMS from "decap-cms-app";
-// // Initialize the CMS object
-// CMS.init();
-// Now the registry is available via the CMS object.
-// CMS.registerPreviewTemplate("my-template", MyTemplate);
 
 // Set up Axios Interceptors
 errorInterceptor();
@@ -140,15 +135,41 @@ app.use(pinia);
 
 // Register Service Worker
 if ('serviceWorker' in navigator) {
-  const version = '1.0.0';
+  const version = '1.1.2'; // Change this when making an update to the Service Worker (sw.js or this file)
   const sw = navigator.serviceWorker as ServiceWorkerContainer;
+
   sw.register(`/sw.js?version=${version}`, { type: 'module', scope: '/' })
-    .then((registration: ServiceWorkerRegistration) => {
+    .then(async (registration: ServiceWorkerRegistration) => {
       console.log('Service Worker registered with scope:', registration.scope);
+
+      // If there is a waiting service worker, inform it to skip waiting and activate
+      if (registration.waiting) {
+        console.log('[Service Worker] New version waiting...');
+        registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+      }
+
+      // Listen for updatefound and handle state changes
+      registration.addEventListener('updatefound', () => {
+        const newWorker = registration.installing;
+        if (newWorker) {
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              console.log('[Service Worker] New version found, waiting to activate...');
+              newWorker.postMessage({ type: 'SKIP_WAITING' });
+            }
+          });
+        }
+      });
     })
     .catch((error: Error) => {
       console.error('Service Worker registration failed:', error.message, error);
     });
+
+  // Reload the page when the new version is activated
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    console.log('[Service Worker] New version activated, reloading page...');
+    window.location.reload(); // Ensure latest version is used
+  });
 }
 
 // Mount the app

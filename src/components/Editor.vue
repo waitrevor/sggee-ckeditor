@@ -360,7 +360,7 @@
 
 	const exportHorizontalSpace = "10mm"
 	const exportVerticalSpace = "12mm"
-	const editorData = ref("<p>Hello from CKEditor 5 in Vue!</p>")
+	const editorData = ref("<p>Welcome! Please log in to begin editing pages.</p>")
 	const editorConfig = {
 		plugins: [
 			Alignment,
